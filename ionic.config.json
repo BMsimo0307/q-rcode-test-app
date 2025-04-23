@@ -1,0 +1,8 @@
+{
+  "name": "QRcodeTestApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite",
+  "id": "508d8114"
+}
