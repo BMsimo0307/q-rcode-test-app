@@ -12,18 +12,15 @@
       </div>
 
       <div v-else>
-        <!-- Import CSV -->
         <ion-item>
           <ion-label>Importer les participants (.csv)</ion-label>
           <input type="file" accept=".csv" @change="handleCSV" />
         </ion-item>
 
-        <!-- Export CSV -->
         <ion-button expand="block" class="ion-margin-top" @click="exportCSV">
           ⬇️ Exporter les participants
         </ion-button>
 
-        <!-- Statistiques -->
         <ion-card class="ion-margin-top">
           <ion-card-header>
             <ion-card-title>📊 Statistiques</ion-card-title>
@@ -36,7 +33,6 @@
           </ion-card-content>
         </ion-card>
 
-        <!-- Ajout manuel -->
         <ion-card class="ion-margin-top">
           <ion-card-header>
             <ion-card-title>➕ Ajouter un participant</ion-card-title>
@@ -67,7 +63,6 @@
           </ion-card-content>
         </ion-card>
 
-        <!-- Sélecteur d'événement -->
         <ion-item v-if="allEvents.length > 0" class="ion-margin-top">
           <ion-label>Filtrer par festival :</ion-label>
           <ion-select v-model="selectedEvent" placeholder="Choisir un festival">
@@ -77,7 +72,6 @@
           </ion-select>
         </ion-item>
 
-        <!-- Recherche -->
         <ion-item v-if="filteredParticipants.length > 0" class="ion-margin-top">
           <ion-label position="stacked">Rechercher un participant :</ion-label>
           <ion-input v-model="searchTerm" placeholder="Tapez un nom..." />
@@ -99,12 +93,10 @@
           </ion-card-content>
         </ion-card>
 
-        <!-- Erreur -->
         <ion-text color="danger" class="ion-text-center mt-4" v-if="errorMessage">
           {{ errorMessage }}
         </ion-text>
 
-        <!-- Liste -->
         <ion-card class="ion-margin-top" v-if="visibleParticipants.length > 0">
           <ion-card-header>
             <ion-card-title>Participants - {{ selectedEvent }}</ion-card-title>
@@ -124,7 +116,6 @@
                     </strong>
                   </p>
                 </ion-label>
-                <!-- Changement manuel du status -->
                 <ion-select
                   interface="popover"
                   :value="p.status"

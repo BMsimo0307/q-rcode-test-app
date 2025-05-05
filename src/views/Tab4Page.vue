@@ -23,7 +23,6 @@
           </ion-card-content>
         </ion-card>
 
-        <!-- Ajout futur: graphique ou histogramme ici -->
       </div>
     </ion-content>
   </ion-page>
