@@ -1,11 +1,18 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router';
-import { RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory } from '@ionic/vue-router'
+import { RouteRecordRaw } from 'vue-router'
 import TabsPage from '../views/TabsPage.vue'
+
+// 🧠 Vérifie l’authentification
+const isAuthenticated = () => !!localStorage.getItem('auth')
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/tabs/tab1'
+    redirect: '/login'
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/LoginPage.vue')
   },
   {
     path: '/tabs/',
@@ -26,7 +33,20 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'tab3',
         component: () => import('@/views/Tab3Page.vue')
+      },
+      {
+        path: 'buy', // ✅ ici dans les children de /tabs
+        component: () => import('@/views/BuyTicketPage.vue')
+      },
+      {
+        path: 'cart',
+        component: () => import('@/views/CartPage.vue')
+      },
+      {
+        path: 'tab4',
+        component: () => import('@/views/Tab4Page.vue')
       }
+      
     ]
   }
 ]
@@ -34,6 +54,18 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
+})
+
+// 🔐 Auth guard
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/login']
+  const authRequired = !publicPages.includes(to.path)
+
+  if (authRequired && !isAuthenticated()) {
+    return next('/login')
+  }
+
+  next()
 })
 
 export default router
